@@ -1,24 +1,24 @@
 import { useState } from "react";
 
-const API_KEY = "";
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 function App() {
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
 
   const getMovies = async () => {
-    const response = await fetch(
-      
-    );
+    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${search}&api_key=${API_KEY}`);
+    
 
     const data = await response.json();
-
+  
     if (data.Search) {
       setMovies(data.Search);
     } else {
       setMovies([]);
     }
   };
+
 
   return (
     <div>
@@ -43,6 +43,6 @@ function App() {
       ))}
     </div>
   );
-}
+};
 
 export default App;
